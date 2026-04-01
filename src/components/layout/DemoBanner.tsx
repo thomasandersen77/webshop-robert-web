@@ -4,8 +4,8 @@ export function DemoBanner() {
   return (
     <Box
       sx={{
-        bgcolor: 'warning.light',
-        borderBottom: (t) => `2px solid ${t.palette.warning.dark}`,
+        bgcolor: 'error.light',
+        borderBottom: (t) => `2px solid ${t.palette.error.dark}`,
         py: 1,
       }}
     >
@@ -15,7 +15,7 @@ export function DemoBanner() {
           sx={{
             fontWeight: 700,
             textAlign: 'center',
-            color: 'warning.dark',
+            color: 'error.dark',
           }}
         >
           🔔 Dette er kun en demo
