@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { CartDrawer } from '../cart/CartDrawer';
 import { DesignSwitcherFloating } from '../navigation/DesignSwitcher';
 import { MobileMenuDrawer } from '../navigation/MobileMenuDrawer';
+import { DemoBanner } from './DemoBanner';
 import { DesktopTopbar } from './DesktopTopbar';
 import { Footer } from './Footer';
 import { MobileTopbar } from './MobileTopbar';
@@ -22,6 +23,7 @@ export function AppShell() {
       }}
     >
       {isMdUp ? <DesktopTopbar /> : <MobileTopbar />}
+      <DemoBanner />
       <MobileMenuDrawer />
       <CartDrawer />
       <Box component="main" sx={{ flex: 1 }}>
