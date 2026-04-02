@@ -1,6 +1,8 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { CatalogProvider } from './context/CatalogContext';
+import { CustomerAuthProvider } from './context/CustomerAuthContext';
 import { ShopUiProvider } from './context/ShopUiProvider';
 import { AppRoutes } from './routes/AppRoutes';
 import { theme } from './theme/theme';
@@ -11,9 +13,13 @@ export default function App() {
       <CssBaseline />
       <BrowserRouter>
         <AuthProvider>
-          <ShopUiProvider>
-            <AppRoutes />
-          </ShopUiProvider>
+          <CatalogProvider>
+            <CustomerAuthProvider>
+              <ShopUiProvider>
+                <AppRoutes />
+              </ShopUiProvider>
+            </CustomerAuthProvider>
+          </CatalogProvider>
         </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>

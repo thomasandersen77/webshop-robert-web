@@ -9,7 +9,6 @@ type Props = {
   title: string;
   subtitle?: string;
   products: ProductItem[];
-  visual: 'a' | 'b' | 'c';
   onAddToCart: (product: ProductItem) => void;
   onSeeAll?: () => void;
   seeAllLabel?: string;
@@ -23,7 +22,6 @@ export function ProductGridSection({
   title,
   subtitle,
   products,
-  visual,
   onAddToCart,
   onSeeAll,
   seeAllLabel = 'Se alle',
@@ -31,11 +29,7 @@ export function ProductGridSection({
   sx,
 }: Props) {
   const size =
-    grid === 'dense'
-      ? { xs: 6, sm: 4, md: 3 }
-      : visual === 'b'
-        ? { xs: 12, sm: 6, lg: 4 }
-        : { xs: 12, sm: 6, lg: 3 };
+    grid === 'dense' ? { xs: 6, sm: 4, md: 3 } : { xs: 12, sm: 6, lg: 3 };
 
   return (
     <Box id={id} sx={sx}>
@@ -48,7 +42,7 @@ export function ProductGridSection({
           sx={{ mb: 3 }}
         >
           <Box>
-            <Typography variant="h4" component="h2" fontWeight={700} sx={visual === 'b' ? { fontFamily: 'Georgia, serif' } : undefined}>
+            <Typography variant="h4" component="h2" fontWeight={700}>
               {title}
             </Typography>
             {subtitle ? (
@@ -65,7 +59,8 @@ export function ProductGridSection({
               onClick={onSeeAll}
               sx={{
                 cursor: 'pointer',
-                fontWeight: 600,
+                fontWeight: 700,
+                color: 'primary.main',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 0.5,
@@ -77,13 +72,19 @@ export function ProductGridSection({
             </Link>
           ) : null}
         </Stack>
-        <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }}>
-          {products.map((p) => (
-            <Grid key={p.id} size={size}>
-              <ProductCard product={p} visual={visual} onAddToCart={onAddToCart} />
-            </Grid>
-          ))}
-        </Grid>
+        {products.length === 0 ? (
+          <Typography color="text.secondary" variant="body2">
+            Ingen produkter å vise.
+          </Typography>
+        ) : (
+          <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }}>
+            {products.map((p) => (
+              <Grid key={p.id} size={size}>
+                <ProductCard product={p} onAddToCart={onAddToCart} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Container>
     </Box>
   );

@@ -41,8 +41,9 @@ export function CategoryCard({ category, onClick, imageHeight = 200 }: Props) {
         overflow: 'hidden',
         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
         '&:hover': {
-          transform: 'translateY(-2px)',
-          boxShadow: '0 16px 32px rgba(18, 28, 45, 0.1)',
+          transform: 'translateY(-3px)',
+          boxShadow: '0 20px 40px rgba(18, 28, 45, 0.12)',
+          borderColor: 'rgba(20, 26, 34, 0.14)',
         },
         '&:focus-visible': {
           outline: (t) => `2px solid ${t.palette.primary.main}`,

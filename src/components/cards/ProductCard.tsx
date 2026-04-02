@@ -15,29 +15,21 @@ import { useState } from 'react';
 import type { ProductBadge, ProductItem } from '../../types/shop';
 import { formatNok } from '../../utils/format';
 
-type Visual = 'a' | 'b' | 'c';
-
 const badgeColor = (b: ProductBadge): 'default' | 'primary' | 'secondary' => {
   if (b === 'Ny') return 'primary';
   if (b === 'Bestselger') return 'secondary';
   return 'default';
 };
 
+const mediaHeight = { xs: 140, sm: 160 };
+
 type Props = {
   product: ProductItem;
-  visual: Visual;
   onAddToCart?: (product: ProductItem) => void;
 };
 
-export function ProductCard({ product, visual, onAddToCart }: Props) {
+export function ProductCard({ product, onAddToCart }: Props) {
   const [fav, setFav] = useState(false);
-
-  const mediaHeight =
-    visual === 'b'
-      ? { xs: 220, sm: 260 }
-      : visual === 'c'
-        ? { xs: 140, sm: 160 }
-        : { xs: 200, sm: 220 };
 
   return (
     <Card
@@ -112,15 +104,11 @@ export function ProductCard({ product, visual, onAddToCart }: Props) {
           display: 'flex',
           flexDirection: 'column',
           gap: 0.5,
-          pt: visual === 'b' ? 2.5 : 2,
+          pt: 2,
           pb: 2,
         }}
       >
-        <Typography
-          variant={visual === 'b' ? 'subtitle1' : 'subtitle2'}
-          fontWeight={600}
-          sx={visual === 'b' ? { fontFamily: 'Georgia, "Times New Roman", serif' } : undefined}
-        >
+        <Typography variant="subtitle2" fontWeight={600}>
           {product.title}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ minHeight: 40 }}>
@@ -141,7 +129,7 @@ export function ProductCard({ product, visual, onAddToCart }: Props) {
           ) : null}
         </Stack>
         <Button
-          variant={visual === 'c' ? 'contained' : 'outlined'}
+          variant="contained"
           color="primary"
           fullWidth
           onClick={(e) => {

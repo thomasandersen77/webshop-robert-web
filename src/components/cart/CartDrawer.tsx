@@ -1,6 +1,9 @@
 import CloseIcon from '@mui/icons-material/Close';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {
+  Alert,
   Box,
+  CircularProgress,
   Divider,
   Drawer,
   IconButton,
@@ -9,13 +12,19 @@ import {
   Typography,
 } from '@mui/material';
 import { useShopUi } from '../../context/useShopUi';
-import { formatNok } from '../../utils/format';
+import { formatNokFromMinor } from '../../utils/format';
 import { CartSummary } from './CartSummary';
 
 export function CartDrawer() {
-  const { cartOpen, setCartOpen, cartItems } = useShopUi();
-
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const {
+    cartOpen,
+    setCartOpen,
+    cartLines,
+    cartTotalMinor,
+    cartLoading,
+    cartError,
+    removeLine,
+  } = useShopUi();
 
   return (
     <Drawer
@@ -51,10 +60,20 @@ export function CartDrawer() {
         </IconButton>
       </Toolbar>
       <Divider />
+      {cartError ? (
+        <Box sx={{ px: 2, pt: 2 }}>
+          <Alert severity="warning">{cartError}</Alert>
+        </Box>
+      ) : null}
       <Stack spacing={2} sx={{ p: 2, flex: 1, overflow: 'auto' }}>
-        {cartItems.map((item) => (
+        {cartLoading && cartLines.length === 0 ? (
+          <Box display="flex" justifyContent="center" py={4}>
+            <CircularProgress size={32} />
+          </Box>
+        ) : null}
+        {cartLines.map((item) => (
           <Stack
-            key={item.id}
+            key={item.productId}
             direction="row"
             spacing={1.5}
             sx={{
@@ -82,22 +101,29 @@ export function CartDrawer() {
               <Typography variant="body2" color="text.secondary">
                 Antall: {item.quantity}
               </Typography>
-              <Box>
-                <Typography variant="body2" fontWeight={700}>
-                  {formatNok(item.price * item.quantity)}
+              <Typography variant="body2" fontWeight={700}>
+                {formatNokFromMinor(item.lineTotalMinor)}
+              </Typography>
+              {item.quantity > 1 ? (
+                <Typography variant="caption" color="text.secondary">
+                  {formatNokFromMinor(item.unitPriceMinor)} × {item.quantity}
                 </Typography>
-                {item.quantity > 1 ? (
-                  <Typography variant="caption" color="text.secondary">
-                    {formatNok(item.price)} × {item.quantity}
-                  </Typography>
-                ) : null}
-              </Box>
+              ) : null}
             </Box>
+            <IconButton
+              size="small"
+              aria-label="Fjern"
+              onClick={() => void removeLine(item.productId)}
+              disabled={cartLoading}
+            >
+              <DeleteOutlineIcon fontSize="small" />
+            </IconButton>
           </Stack>
         ))}
       </Stack>
       <CartSummary
-        subtotal={subtotal}
+        totalMinor={cartTotalMinor}
+        loading={cartLoading}
         onCheckout={() => setCartOpen(false)}
         onContinue={() => setCartOpen(false)}
       />

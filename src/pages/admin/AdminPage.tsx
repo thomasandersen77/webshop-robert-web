@@ -108,7 +108,7 @@ export default function AdminPage() {
             </Typography>
           </Box>
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-            <Button component={RouterLink} to="/design-a" variant="outlined">
+            <Button component={RouterLink} to="/" variant="outlined">
               Til butikk
             </Button>
             <Button variant="contained" color="secondary" onClick={logout}>

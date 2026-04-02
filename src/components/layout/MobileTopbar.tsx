@@ -12,22 +12,14 @@ import {
   useScrollTrigger,
 } from '@mui/material';
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { useShopUi } from '../../context/useShopUi';
 import { SearchBar } from '../search/SearchBar';
 
 export function MobileTopbar() {
   const { toggleNav, openCart, cartItemCount } = useShopUi();
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 4 });
-
-  const homePath = pathname.startsWith('/design-c')
-    ? '/design-c'
-    : pathname.startsWith('/design-b')
-      ? '/design-b'
-      : '/design-a';
 
   return (
     <AppBar
@@ -45,18 +37,21 @@ export function MobileTopbar() {
           <MenuIcon />
         </IconButton>
         <Box
-          onClick={() => navigate(homePath)}
-          sx={{ flex: 1, textAlign: 'center', cursor: 'pointer', minWidth: 0 }}
+          component={RouterLink}
+          to="/"
+          sx={{
+            cursor: 'pointer',
+            flex: 1,
+            minWidth: 0,
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
         >
           <Typography variant="subtitle1" fontWeight={800} color="primary.main" noWrap>
             Robert Shop
           </Typography>
         </Box>
-        <IconButton
-          color="inherit"
-          aria-label="Søk"
-          onClick={() => setSearchOpen((o) => !o)}
-        >
+        <IconButton color="inherit" aria-label={searchOpen ? 'Lukk søk' : 'Åpne søk'} onClick={() => setSearchOpen((v) => !v)}>
           <SearchIcon />
         </IconButton>
         <IconButton color="inherit" aria-label="Handlekurv" onClick={openCart}>

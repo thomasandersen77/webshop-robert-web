@@ -16,14 +16,14 @@ export const theme = createTheme({
       contrastText: '#1c2430',
     },
     background: {
-      default: '#f7f5f2',
+      default: '#f0ebe4',
       paper: '#ffffff',
     },
     text: {
-      primary: '#1c2430',
-      secondary: '#5f6b76',
+      primary: '#141a22',
+      secondary: '#3d4754',
     },
-    divider: 'rgba(28, 36, 48, 0.08)',
+    divider: 'rgba(20, 26, 34, 0.12)',
   },
   shape: {
     borderRadius: 20,
@@ -89,7 +89,7 @@ export const theme = createTheme({
       styleOverrides: {
         body: {
           margin: 0,
-          backgroundColor: '#f7f5f2',
+          backgroundColor: '#f0ebe4',
         },
         '*': {
           boxSizing: 'border-box',
@@ -124,8 +124,8 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 24,
-          boxShadow: '0 10px 30px rgba(18, 28, 45, 0.06)',
-          border: '1px solid rgba(28, 36, 48, 0.06)',
+          boxShadow: '0 10px 32px rgba(18, 28, 45, 0.08)',
+          border: '1px solid rgba(20, 26, 34, 0.1)',
           overflow: 'hidden',
         },
       },
@@ -133,10 +133,10 @@ export const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(255,255,255,0.78)',
+          backgroundColor: 'rgba(255,255,255,0.88)',
           backdropFilter: 'blur(16px)',
-          borderBottom: '1px solid rgba(28, 36, 48, 0.08)',
-          color: '#1c2430',
+          borderBottom: '1px solid rgba(20, 26, 34, 0.1)',
+          color: '#141a22',
           boxShadow: 'none',
         },
       },

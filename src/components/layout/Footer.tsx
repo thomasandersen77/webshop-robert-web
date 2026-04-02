@@ -15,9 +15,17 @@ export function Footer() {
       <Container maxWidth="lg">
         <Stack spacing={2}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="space-between">
-            <Typography variant="subtitle1" fontWeight={800} color="primary.main">
+            <Link
+              component={RouterLink}
+              to="/"
+              variant="subtitle1"
+              fontWeight={800}
+              color="primary.main"
+              underline="none"
+              sx={{ '&:hover': { opacity: 0.9 } }}
+            >
               Robert Shop
-            </Typography>
+            </Link>
             <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
               <Link href="#" variant="body2" color="text.secondary" underline="hover">
                 Kundeservice
@@ -27,6 +35,12 @@ export function Footer() {
               </Link>
               <Link href="#" variant="body2" color="text.secondary" underline="hover">
                 Personvern
+              </Link>
+              <Link component={RouterLink} to="/login" variant="body2" color="text.secondary" underline="hover">
+                Logg inn
+              </Link>
+              <Link component={RouterLink} to="/register" variant="body2" color="text.secondary" underline="hover">
+                Registrer
               </Link>
               <Link component={RouterLink} to="/admin/login" variant="body2" color="text.secondary" underline="hover">
                 Admin

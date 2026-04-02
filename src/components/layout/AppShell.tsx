@@ -2,7 +2,6 @@ import { Box, useMediaQuery } from '@mui/material';
 import type { Theme } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
 import { CartDrawer } from '../cart/CartDrawer';
-import { DesignSwitcherFloating } from '../navigation/DesignSwitcher';
 import { MobileMenuDrawer } from '../navigation/MobileMenuDrawer';
 import { DemoBanner } from './DemoBanner';
 import { DesktopTopbar } from './DesktopTopbar';
@@ -19,7 +18,7 @@ export function AppShell() {
         display: 'flex',
         flexDirection: 'column',
         bgcolor: 'background.default',
-        pb: { xs: 'calc(72px + env(safe-area-inset-bottom, 0px))', md: 0 },
+        pb: { xs: 'env(safe-area-inset-bottom, 0px)', md: 0 },
       }}
     >
       {isMdUp ? <DesktopTopbar /> : <MobileTopbar />}
@@ -30,7 +29,6 @@ export function AppShell() {
         <Outlet />
       </Box>
       <Footer />
-      <DesignSwitcherFloating />
     </Box>
   );
 }

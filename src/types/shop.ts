@@ -1,11 +1,11 @@
-export type CategoryKey = 'electronics' | 'home' | 'sport' | 'beauty';
+export type CategoryKey = string;
 
 export interface CategoryItem {
   id: CategoryKey;
   title: string;
   description: string;
   image: string;
-  /** Hash only, e.g. `#electronics` — combined with current route in navigation */
+  /** Hash only, e.g. `#<uuid>` — combined with current route in navigation */
   href: string;
   badge?: string;
 }
@@ -16,6 +16,7 @@ export interface ProductItem {
   id: string;
   title: string;
   category: CategoryKey;
+  /** Visningspris i hovedvaluta (kr); API bruker minor units — mappes i API-lag. */
   price: number;
   oldPrice?: number;
   image: string;
@@ -23,10 +24,12 @@ export interface ProductItem {
   shortDescription: string;
 }
 
-export interface CartItem {
-  id: string;
+/** Handlekurvlinje for UI — tall fra backend (minor) der det er relevant. */
+export interface CartLineUi {
+  productId: string;
   title: string;
-  price: number;
   image: string;
   quantity: number;
+  unitPriceMinor: number;
+  lineTotalMinor: number;
 }
