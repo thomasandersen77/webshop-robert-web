@@ -1,4 +1,5 @@
 import { Box, Container, Divider, Link, Stack, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 export function Footer() {
   return (
@@ -26,6 +27,9 @@ export function Footer() {
               </Link>
               <Link href="#" variant="body2" color="text.secondary" underline="hover">
                 Personvern
+              </Link>
+              <Link component={RouterLink} to="/admin/login" variant="body2" color="text.secondary" underline="hover">
+                Admin
               </Link>
             </Stack>
           </Stack>
